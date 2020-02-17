@@ -1,19 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from accounts.models import App
 # Create your views here.
 def indexView(request):
-    app_lists = App.objects.all()
-    # TODO app user count here
-    params = {
-        'app_lists': app_lists
-    }
-    return render(request, 'index.html', params)
+    return render(request, 'index.html')
 
 @login_required
 def dashboardView(request):
-    return render(request, 'dashboard.html')
+    app_lists = App.objects.all()
+    app_user_counts = App.objects.annotate(num_apps=Count('name'))
+    params = {
+        'app_lists': app_lists,
+        'app_user_counts': app_user_counts
+    }
+
+    return render(request, 'dashboard.html', params)
 
 def registerView(request):
     if request.method=="POST":

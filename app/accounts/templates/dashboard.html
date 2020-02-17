@@ -1,5 +1,36 @@
 {% extends 'index.html' %}
 
 {% block content %}
- <h1>Welcom, {{user.username}}</h1>
+  <h1>Welcom, {{user.username}}</h1>
+
+  <h1>App list</h1>
+  <table style="width:30%">
+    <tr>
+      <th>App id</th>
+      <th>App name</th>
+      <th>App player</th>
+    </tr>
+      {% for app_list in app_lists %}
+      <tr>
+        <td>{{app_list.id}}</td>
+        <td>{{app_list.name}}</td>
+        <td>{{app_list.user_id}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+  <!-- TODO: here is WIP -->
+  <h1>Count data</h1>
+  <table style="width:30%">
+    <tr>
+      <th>App name</th>
+      <th>player count</th>
+    </tr>
+    {% for app_user_count in app_user_counts %}
+      <tr>
+        <td>{{app_user_count.name}}</td>
+        <td>{{app_user_count.num_apps}}</td>
+      </tr>
+    {% endfor %}
+  </table>
 {% endblock %}
