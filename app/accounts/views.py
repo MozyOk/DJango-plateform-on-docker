@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from accounts.models import App
 # Create your views here.
 def indexView(request):
-    return render(request, 'index.html')
+    app_lists = App.objects.all()
+    # TODO app user count here
+    params = {
+        'app_lists': app_lists
+    }
+    return render(request, 'index.html', params)
 
 @login_required
 def dashboardView(request):

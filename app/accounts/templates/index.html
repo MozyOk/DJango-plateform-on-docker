@@ -17,6 +17,9 @@ font: 16px "Carnivalee Freakshow"; margin: auto; position: relative; width: 900p
     {% block content %}
 
         <h1>Welcome home Page </h1>
+        {% for app_list in app_lists %}
+        <h1>App id: {{app_list.id}}, App name: {{app_list.name}}, App player: {{app_list.user_id}}</h1>
+        {% endfor %}
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">logout</a>
         {% else%}
